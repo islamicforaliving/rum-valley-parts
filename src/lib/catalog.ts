@@ -1,4 +1,4 @@
-// Rum Valley Parts - Complete Product Catalog (400+ products)
+﻿// Rum Valley Parts - Complete Product Catalog (400+ products)
 
 export type CategorySlug =
   | "engine" | "brakes" | "suspension" | "transmission"
@@ -42,60 +42,76 @@ const fltParts = ["Oil Filter","Fuel Filter","Air Filter","Transmission Filter",
 const cabParts = ["Side Mirror","Door Handle","Bumper","Grille Assembly","Hood Latch","Windshield","Door Seal","Weatherstrip","Step Board","Fender","Fender Mirror","Light Bracket","Mirror Arm","Mirror Glass","Deflector","Splash Shield"];
 const ligParts = ["Headlight Assembly","Taillight","Turn Signal","Brake Light","Running Light","Marker Light","Work Light","Fog Light","LED Strip","License Plate Light","Instrument Light","Interior Dome Light"];
 const drvParts = ["Drive Shaft","U-Joint","Yoke","Differential Gear","Axle Shaft","Wheel Hub","Wheel Bearing","Final Drive","Transfer Case","Transfer Shaft","Output Flange"];
-const exhaustParts = ["Turbocharger","Exhaust Manifold","Downpipe","DPF Filter","EGR Cooler","Exhaust Valve","Stack","Muffler","Tailpipe"," Exhaust Pipe"];
+const exhaustParts = ["Turbocharger","Exhaust Manifold","Downpipe","DPF Filter","EGR Cooler","Exhaust Valve","Stack","Muffler","Tailpipe","Exhaust Pipe"];
 
-const makeProducts = (prefix: string, parts: string[], cat: CategorySlug, count: number): Product[] => {
+let productCounter = 0;
+const generateId = () => `prod-${String(productCounter++).padStart(4, "0")}`;
+
+const makeProducts = (prefix: string, parts: string[], cat: CategorySlug, targetCount: number): Product[] => {
   const result: Product[] = [];
-  parts.forEach((part, i) => {
-    brands.slice(0, Math.min(5, Math.floor(count / parts.length) + 1)).forEach((brand) => {
-      if (result.length < count) {
-        result.push({
-          id: `${prefix}-${result.length}`,
-          sku: `RVP-${prefix.toUpperCase()}-${String(result.length).padStart(4,'0')}`,
-          name: `${brand} ${part}`,
-          brand,
-          category: cat,
-          partNumber: `${prefix.toUpperCase()}-${brand.substring(0,3)}-${String(i+1).padStart(3,'0')}`,
-          shortDescription: `OEM-grade ${part.toLowerCase()} for ${brand} trucks`,
-          specs: [{label:"Material",value:"Alloy Steel"},{label:"Warranty",value:"2 Years"},{label:"Certification",value:"DOT Approved"}],
-          fits: `${brand} trucks 2010-2024`,
-          memberPrice: Math.round((10 + Math.random()*400)*100)/100,
-          listPrice: Math.round((20 + Math.random()*500)*100)/100,
-          stock: Math.random()>0.2?"in-stock":"limited",
-          rating: Math.round((3.5+Math.random()*1.5)*10)/10,
-          reviews: Math.floor(5+Math.random()*45),
-          membersOnly: true,
-          tags: [cat,"oem","replacement"],
-          image: `https://placehold.co/400x400/1e293b/ffffff?text=${encodeURIComponent(part.substring(0,20))}`
-        });
-      }
-    });
-  });
+  for (const part of parts) {
+    for (const brand of brands) {
+      if (result.length >= targetCount) break;
+      const memberPrice = Math.round((15 + Math.random() * 350) * 100) / 100;
+      result.push({
+        id: generateId(),
+        sku: `RVP-${prefix}-${String(result.length).padStart(4,"0")}`,
+        name: `${brand} ${part}`,
+        brand,
+        category: cat,
+        partNumber: `${prefix}-${brand.substring(0,3)}-${String(result.length).padStart(3,"0")}`,
+        shortDescription: `OEM-grade ${part.toLowerCase()} for ${brand} trucks`,
+        specs: [{label:"Material",value:"Alloy Steel"},{label:"Warranty",value:"2 Years"},{label:"Certification",value:"DOT Approved"}],
+        fits: `${brand} trucks 2010-2024`,
+        memberPrice,
+        listPrice: Math.round((memberPrice * 1.25) * 100) / 100,
+        stock: Math.random() > 0.15 ? "in-stock" : "limited",
+        rating: Math.round((3.5 + Math.random() * 1.5) * 10) / 10,
+        reviews: Math.floor(5 + Math.random() * 45),
+        membersOnly: true,
+        tags: [cat, "oem", "replacement"],
+        image: `https://placehold.co/400x400/1e293b/ffffff?text=${encodeURIComponent(part.substring(0, 18))}`
+      });
+    }
+    if (result.length >= targetCount) break;
+  }
   return result;
 };
 
 export const allProducts = [
-  ...makeProducts("ENG", engParts, "engine", 160),
-  ...makeProducts("BRK", brkParts, "brakes", 140),
+  ...makeProducts("ENG", engParts, "engine", 150),
+  ...makeProducts("BRK", brkParts, "brakes", 120),
   ...makeProducts("SUS", susParts, "suspension", 100),
   ...makeProducts("TRN", transParts, "transmission", 80),
   ...makeProducts("ELE", elecParts, "electrical", 100),
-  ...makeProducts("CCL", coolParts, "cooling", 50),
-  ...makeProducts("FLT", fltParts, "filters-fluids", 40),
-  ...makeProducts("CAB", cabParts, "cab-body", 40),
-  ...makeProducts("LIG", ligParts, "lighting", 30),
-  ...makeProducts("DRV", drvParts, "drivetrain", 20),
-  ...makeProducts("EXH", exhaustParts, "exhaust", 20),
-].slice(0, 420);
+  ...makeProducts("CCL", coolParts, "cooling", 60),
+  ...makeProducts("FLT", fltParts, "filters-fluids", 50),
+  ...makeProducts("CAB", cabParts, "cab-body", 50),
+  ...makeProducts("LIG", ligParts, "lighting", 40),
+  ...makeProducts("DRV", drvParts, "drivetrain", 40),
+  ...makeProducts("EXH", exhaustParts, "exhaust", 40),
+].slice(0, 450);
 
 export const products = allProducts;
 
-export const getProductsByCategory = (slug: CategorySlug): Product[] => allProducts.filter((p)=>p.category===slug);
-export const getProduct = (id: string): Product | undefined => allProducts.find((p)=>p.id===id);
-export const getCategory = (slug: string): Category | undefined => categories.find((c)=>c.slug===slug);
-export const searchProducts = (query: string): Product[] => {
+export const getProductsByCategory = (slug: CategorySlug): Product[] => allProducts.filter((p) => p.category === slug);
+export const getProduct = (id: string) => allProducts.find((p) => p.id === id);
+export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
+export const searchProducts = (query: string) => {
   const q = query.toLowerCase();
-  return allProducts.filter(p=>p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q)||p.partNumber.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q));
+  return allProducts.filter(
+    (p) =>
+      p.name.toLowerCase().includes(q) ||
+      p.sku.toLowerCase().includes(q) ||
+      p.brand.toLowerCase().includes(q) ||
+      p.partNumber.toLowerCase().includes(q) ||
+      p.tags.some((t) => t.includes(q))
+  );
 };
-export const formatPrice = (price: number): string => new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2}).format(price);
-export const stockMeta: Record<string,{label:string;tone:string}> = {"in-stock":{label:"In Stock",tone:"green"},limited:{label:"Limited Stock",tone:"amber"},backorder:{label:"Backorder",tone:"red"}};
+export const formatPrice = (price: number) =>
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
+export const stockMeta: Record<string, { label: string; tone: string }> = {
+  "in-stock": { label: "In Stock", tone: "green" },
+  limited: { label: "Limited Stock", tone: "amber" },
+  backorder: { label: "Backorder", tone: "red" },
+};
