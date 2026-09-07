@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, X, ChevronRight, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { categories, searchProducts, stockMeta } from "@/lib/catalog";
+import { categories, searchProducts, stockMeta, allProducts } from "@/lib/catalog";
 import { useAuth, visibleProducts } from "@/lib/auth";
 import { ProductCard } from "@/components/ProductCard";
 

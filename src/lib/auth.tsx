@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { products as catalogProducts, type Product } from "./catalog";
+import { products as catalogProducts, type Product, allProducts } from "./catalog";
 
 // Lightweight client-side auth + account state.
 // Replaces easily with a real B2B backend later; the shape stays stable.
@@ -296,12 +296,12 @@ export function useAuth(): AuthState {
 
 // Products visible to a given user. membersOnly products require an account.
 export function visibleProducts(user: AccountUser | null): Product[] {
-  return catalogProducts.filter((p) => (p.membersOnly ? !!user : true));
+  return allProducts.filter((p) => (p.membersOnly ? !!user : true));
 }
 
 // Account-exclusive products (members-only) — shown only to logged-in customers.
 export function exclusiveProducts(user: AccountUser | null): Product[] {
-  return catalogProducts.filter((p) => p.membersOnly && !!user);
+  return allProducts.filter((p) => p.membersOnly && !!user);
 }
 
 // Customer-specific price for a product. Architecture supports per-customer /
