@@ -1,4 +1,4 @@
-﻿// Rum Valley Parts - Complete Product Catalog (400+ products)
+// Rum Valley Parts - Complete Product Catalog (400+ products)
 
 export type CategorySlug =
   | "engine" | "brakes" | "suspension" | "transmission"
