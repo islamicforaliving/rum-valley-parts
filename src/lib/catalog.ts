@@ -43,15 +43,6 @@ const cabParts = ["Side Mirror","Mirror Arm","Mirror Glass","Door Handle","Door 
 const ligParts = ["Headlight Assembly","Taillight Assembly","Turn Signal Light","Marker Light","Backup Light","Brake Light","Dash Light","Work Light","Spot Light","LED Bar","Fog Light","License Plate Light","Interior Light","Switch Panel","Light Bulb","LED Strip","Harness Connector","Light Mount","Light Bracket"];
 const drvParts = ["Drive Shaft","U-Joint","Yoke","Differential Gear","Axle Shaft","Wheel Hub","Wheel Bearing","Final Drive","Transfer Case","Transfer Shaft","Output Flange","Driveline Support","Center Support Bearing","Slip Yoke","Cardan Joint","Constant Velocity Joint","Drive Shaft Tube","Flange Adapter","Pinion Gear"];
 const exhaustParts = ["Turbocharger","Exhaust Manifold","Downpipe","DPF Filter","EGR Cooler","Exhaust Valve","Stack","Muffler","Tailpipe","Exhaust Pipe"];
-const susParts = ["Air Spring","Ride Strut","King Pin Kit","Tie Rod","Drag Link","Steering Gear","Pitman Arm","Idler Arm","Track Bar","Leaf Spring","Spring Shackle","U-Bolt","Shock Absorber","Air Compressor","Pressure Gauge","Height Control Valve"];
-const transParts = ["Clutch Kit","Pressure Plate","Throwout Bearing","Flywheel","Clutch Disc","Shift Fork","Synchro Ring","Main Shaft","Counter Shaft","Gear Set","Oil Seal","Gasket Kit","Transfer Case Kit","Driveshaft Yoke","Universal Joint"];
-const elecParts = ["Wiring Harness","Connector Kit","Switch Assembly","Relay","Fuse Panel","Battery Cable","Ground Strap","Alternator","Starter Motor","Voltage Regulator","Instrument Cluster","Turn Signal Switch","Horn Assembly","Blower Motor"];
-const coolParts = ["Radiator","Water Pump","Thermostat","Fan Clutch","Fan Blade","Coolant Hose","Overflow Tank","Heater Core","Temperature Gauge","Pressure Cap","Shroud Assembly","Intercooler","Charge Air Cooler","Coolant Filter"];
-const fltParts = ["Oil Filter","Fuel Filter","Air Filter","Transmission Filter","Coolant Filter","Hydraulic Filter","Fuel Water Separator","Cabin Air Filter","Pre-Filter","Oil Filter Adapter","Spin-on Filter","Cartridge Filter"];
-const cabParts = ["Side Mirror","Door Handle","Bumper","Grille Assembly","Hood Latch","Windshield","Door Seal","Weatherstrip","Step Board","Fender","Fender Mirror","Light Bracket","Mirror Arm","Mirror Glass","Deflector","Splash Shield"];
-const ligParts = ["Headlight Assembly","Taillight","Turn Signal","Brake Light","Running Light","Marker Light","Work Light","Fog Light","LED Strip","License Plate Light","Instrument Light","Interior Dome Light"];
-const drvParts = ["Drive Shaft","U-Joint","Yoke","Differential Gear","Axle Shaft","Wheel Hub","Wheel Bearing","Final Drive","Transfer Case","Transfer Shaft","Output Flange"];
-const exhaustParts = ["Turbocharger","Exhaust Manifold","Downpipe","DPF Filter","EGR Cooler","Exhaust Valve","Stack","Muffler","Tailpipe","Exhaust Pipe"];
 
 let productCounter = 0;
 const generateId = () => `prod-${String(productCounter++).padStart(4, "0")}`;
@@ -124,3 +115,4 @@ export const stockMeta: Record<string, { label: string; tone: string }> = {
   limited: { label: "Limited Stock", tone: "amber" },
   backorder: { label: "Backorder", tone: "red" },
 };
+export * from "./fitment";
