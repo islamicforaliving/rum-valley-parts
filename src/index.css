@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Rum Valley — premium industrial B2B design system.
+   All colors are HSL channel values; tailwind.config wraps them as hsl(var(--token)). */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 215 28% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 12%;
+
+    /* MVP-style commercial navy */
+    --primary: 219 78% 28%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 16% 94%;
+    --secondary-foreground: 215 30% 14%;
+
+    --muted: 215 16% 95%;
+    --muted-foreground: 215 10% 42%;
+
+    /* High-energy commercial amber / golden orange */
+    --accent: 42 98% 50%;
+    --accent-foreground: 219 78% 18%;
+
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 14% 88%;
+    --input: 215 14% 88%;
+    --ring: 38 95% 52%;
+
+    --radius: 0.25rem;
+
+    /* Surfaces */
+    --surface: 215 20% 97%;
+    --surface-2: 215 16% 92%;
+    --steel: 215 18% 22%;
+    --steel-light: 215 14% 38%;
+
+    /* Brand accent variants */
+    --amber: 38 95% 52%;
+    --amber-deep: 32 90% 44%;
+    --amber-soft: 40 90% 95%;
+
+    --sidebar-background: 215 30% 11%;
+    --sidebar-foreground: 215 16% 88%;
+    --sidebar-primary: 38 95% 52%;
+    --sidebar-primary-foreground: 215 30% 10%;
+    --sidebar-accent: 215 24% 18%;
+    --sidebar-accent-foreground: 40 30% 96%;
+    --sidebar-border: 215 20% 22%;
+    --sidebar-ring: 38 95% 52%;
+  }
+
+  .dark {
+    --background: 215 30% 7%;
+    --foreground: 40 30% 96%;
+
+    --card: 215 28% 10%;
+    --card-foreground: 40 30% 96%;
+
+    --popover: 215 28% 10%;
+    --popover-foreground: 40 30% 96%;
+
+    --primary: 40 30% 96%;
+    --primary-foreground: 215 30% 10%;
+
+    --secondary: 215 22% 16%;
+    --secondary-foreground: 40 30% 96%;
+
+    --muted: 215 22% 16%;
+    --muted-foreground: 215 12% 62%;
+
+    --accent: 38 95% 52%;
+    --accent-foreground: 215 30% 10%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 38 95% 52%;
+
+    --surface: 215 26% 12%;
+    --surface-2: 215 22% 16%;
+    --steel: 215 18% 22%;
+    --steel-light: 215 14% 38%;
+
+    --amber: 38 95% 52%;
+    --amber-deep: 32 90% 44%;
+    --amber-soft: 38 60% 18%;
+
+    --sidebar-background: 215 32% 5%;
+    --sidebar-foreground: 215 16% 86%;
+    --sidebar-primary: 38 95% 52%;
+    --sidebar-primary-foreground: 215 30% 10%;
+    --sidebar-accent: 215 24% 14%;
+    --sidebar-accent-foreground: 40 30% 96%;
+    --sidebar-border: 215 20% 16%;
+    --sidebar-ring: 38 95% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.85);
+    color: hsl(var(--accent-foreground));
+  }
+}
+
+@layer components {
+  /* Industrial condensed display utility */
+  .font-display {
+    font-family: "Oswald", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-body {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  /* Hairline grid / technical backdrop */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .bg-grid-dark {
+    background-image:
+      linear-gradient(
+        to right,
+        hsl(var(--foreground) / 0.06) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        hsl(var(--foreground) / 0.06) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+  }
+
+  /* Amber accent rule */
+  .accent-rule {
+    position: relative;
+  }
+  .accent-rule::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: hsl(var(--accent));
+  }
+
+  .shadow-industrial {
+    box-shadow:
+      0 1px 0 0 hsl(var(--border)),
+      0 12px 28px -18px hsl(215 30% 10% / 0.45);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .auth-input {
+    height: 2.75rem;
+    width: 100%;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
+    padding-left: 2.25rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+  }
+  .auth-input:focus {
+    border-color: hsl(var(--accent));
+  }
+
+  .form-input {
+    height: 2.75rem;
+    width: 100%;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+  }
+  .form-input:focus {
+    border-color: hsl(var(--accent));
+  }
+}
