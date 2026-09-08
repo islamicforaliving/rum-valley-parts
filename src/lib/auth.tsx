@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { allProducts as products, type Product } from "./catalog";
+import { allProducts, type Product } from "./catalog";
 
 // Lightweight client-side auth + account state.
 // Replaces easily with a real B2B backend later; the shape stays stable.
